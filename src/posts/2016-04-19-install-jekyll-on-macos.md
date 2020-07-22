@@ -1,6 +1,6 @@
 ---
-title: Install Jekyll on macOS Mojave
-description: Learn how to install Jekyll static site generator on macOS Mojave using Homebrew.
+title: Install Jekyll on macOS
+description: Learn how to install Jekyll static site generator on macOS using Homebrew.
 date: 2016-04-19T22:00:00Z
 lastModified: 2019-03-22T16:15:00Z
 tags:
@@ -9,12 +9,11 @@ tags:
   - Jamstack
 ---
 
-[Jekyll](https://jekyllrb.com/) is a tool for transforming your plain text into static websites and blogs. It is simple, static, and blog-aware. Jekyll uses the [Liquid templating language](https://docs.shopify.com/themes/liquid-basics){rel="nofollow"} and has built-in [Markdown](https://daringfireball.net/projects/markdown/){rel="nofollow"} and [Textile](https://en.wikipedia.org/wiki/Textile_(markup_language)){rel="nofollow"} support. It also ties in nicely to [Github Pages](https://pages.github.com/){rel="nofollow"} but I personal use [Netlify](https://www.netlify.com){rel="nofollow"} to host this website for free. I highly recommend you join [Jekyll Talk](https://talk.jekyllrb.com/){rel="nofollow"} the official support forum where you can ask questions and discuss all aspects of Jekyll. 
+[Jekyll](https://jekyllrb.com/) is a tool for transforming your plain text into static websites and blogs. It is simple, static, and blog-aware. Jekyll uses the [Liquid templating language](https://docs.shopify.com/themes/liquid-basics){rel="nofollow"} and has built-in [Markdown](https://daringfireball.net/projects/markdown/){rel="nofollow"} and [Textile](<https://en.wikipedia.org/wiki/Textile_(markup_language)>){rel="nofollow"} support. It also ties in nicely to [Github Pages](https://pages.github.com/){rel="nofollow"} but I personal use [Netlify](https://www.netlify.com){rel="nofollow"} to host this website for free. I highly recommend you join [Jekyll Talk](https://talk.jekyllrb.com/){rel="nofollow"} the official support forum where you can ask questions and discuss all aspects of Jekyll.
 
-##  Install Xcode Command Line Tools
+## Install Xcode Command Line Tools
 
 Installing Jekyll is easy and straight-forward, but there are a few requirements you’ll need to make sure your system has before you start.
-
 
 Install the Xcode Command Line Tools using your Terminal app.
 
@@ -36,7 +35,7 @@ Next we will install [Homebrew](https://brew.sh){rel="nofollow"} a package manag
 
 **Why?**
 
-We will use Homebrew to install Ruby. 
+We will use Homebrew to install Ruby.
 
 **Why macOS already comes with a version of Ruby?**
 
@@ -248,8 +247,7 @@ https://docs.brew.sh
 
 As you can see above we have now install Homebrew successfully.
 
-Next, we will install Ruby using Homebrew. This route is recommended for most users. 
-
+Next, we will install Ruby using Homebrew. This route is recommended for most users.
 
 **Note:** I have added an advance section below on 'How to manage multiple versions of Ruby using rbenv' but this section is completely unnecessary for most users installing Jekyll for the first time.
 
@@ -399,6 +397,7 @@ ruby -v
 ```
 
 Output:
+
 ```
 ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
 ```
@@ -492,6 +491,7 @@ rbenv init
 ```
 
 Output:
+
 ```
 MacBook-Pro:jekyll-test-site Colin$ rbenv init
 # Load rbenv automatically by appending
@@ -520,6 +520,7 @@ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor 
 ```
 
 Output:
+
 ```
 MacBook-Pro:jekyll-test-site Colin$ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 Checking for `rbenv' in PATH: /usr/local/bin/rbenv
@@ -559,6 +560,7 @@ rbenv versions
 ```
 
 Output:
+
 ```
 MacBook-Pro:jekyll-test-site Colin$ rbenv versions
   system
@@ -579,6 +581,7 @@ ruby -v
 ```
 
 Output:
+
 ```
 MacBook-Pro:jekyll-test-site Colin$ ruby -v
 ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-darwin18]
@@ -591,6 +594,7 @@ rbenv prefix 2.5.3
 ```
 
 Output:
+
 ```
 /Users/Colin/.rbenv/versions/2.5.3
 ```
@@ -601,7 +605,6 @@ Output:
 rm -rf /Users/Colin/.rbenv/versions/2.5.3
 ```
 
-
 ## Install Bundler
 
 Installing [Bundler](https://bundler.io){rel="nofollow"} provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
@@ -611,6 +614,7 @@ gem install bundler
 ```
 
 Output:
+
 ```
 MacBook-Pro:jekyll-test-site Colin$ gem install bundler
 Fetching bundler-2.0.1.gem
