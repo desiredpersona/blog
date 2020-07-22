@@ -1,3 +1,28 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "/bluehost/"
+  to = "https://www.bluehost.com/track/0000001/"
+  status = 301
+
+[[redirects]]
+  from = "/open-source/"
+  to = "/themes/"
+  status = 301
+
+[[redirects]]
+  from = "/install-jekyll/"
+  to = "/install-jekyll-on-macos/"
+  status = 301
+
+[[redirects]]
+  from = "/google-firebase-hosting-jekyll/"
+  to = "/jekyll-firebase-hosting/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-install-wordpress-hosting/"
+  to = "/how-to-install-wordpress-with-bluehost-web-hosting/"
+  status = 301
