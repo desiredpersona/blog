@@ -1,9 +1,9 @@
 ---
-title: How to add Disqus Comments to your Jekyll blog
+title: How to add Disqus comments to your Jekyll blog
 description: Learn how to setup Disqus comments plug-in on your Jekyll blog.
 date: 2016-05-11T22:30:00Z
 lastModified: 2019-07-14T14:52:00Z
-tags: 
+tags:
   - Jekyll
   - Disqus
 ---
@@ -21,9 +21,9 @@ Open your Jekyll sites `config.yml` file and add the following code. Remember to
 ```yaml
 # Disqus Comments
 disqus:
-    # Leave shortname blank to disable comments site-wide.
-    # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
-    shortname: my_disqus_shortname
+  # Leave shortname blank to disable comments site-wide.
+  # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
+  shortname: my_disqus_shortname
 ```
 
 Create a file called `disqus_comments.html` in Jekyll’s `_includes` folder and add the following code and save the file.
