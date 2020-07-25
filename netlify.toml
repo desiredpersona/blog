@@ -26,3 +26,8 @@
   from = "/how-to-install-wordpress-hosting/"
   to = "/how-to-install-wordpress-with-bluehost-web-hosting/"
   status = 301
+
+[[redirects]]
+  from = "/writings/"
+  to = "/"
+  status = 301
