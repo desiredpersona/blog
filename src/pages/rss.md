@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: rss
   url: /feed.xml
-  order: 3
+  order: 4
 permalink: false
 excludeFromSitemap: true
 ---

@@ -325,6 +325,10 @@ footer {
   text-decoration: none;
 }
 
+.hidden {
+  display: none;
+}
+
 /*
 
   Media queries
