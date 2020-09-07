@@ -1,6 +1,6 @@
 ---
-title: How to add Google Analytics to a Jekyll website
-description: Learn how to add Google Analytics tracking code to your Jekyll static website. Google Analytics is a free web analytics service offered by Google that tracks and reports website traffic.
+title: Google Analytics for Jekyll
+description: Add Google Analytics tracking script to a Jekyll website.
 date: 2016-04-21T10:00:00Z
 lastModified: 2018-02-21T18:03:00Z
 tags:
@@ -70,7 +70,6 @@ Opened your `head.html` file which is normally located in your site's `_includes
 
 In future, when you run `bundle exec jekyll serve` your Analytics tracking will no longer render when browsing your website locally. This prevents visit from `localhost:4000` messing up your analytics because by default Jekyll's environment is set to development.
 
-
 Great right?
 
 "But how do i setup Google Analytics to only track site visitors on a production environment?" I hear you say.
@@ -92,4 +91,3 @@ If you have followed all the steps correctly, you should now have Google Analyti
 Unsure?
 
 Open your `_site` folder after you build your site. Check to see if Google Analytics tracking code was added to the `<head>` section of the generated files before you push updates to your live site.
-

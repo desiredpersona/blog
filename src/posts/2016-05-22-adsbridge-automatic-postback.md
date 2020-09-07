@@ -1,6 +1,6 @@
 ---
-title: How to set up postback tracking in AdsBridge
-description: Learn how to set up postback in AdsBridge tracking platform to pass conversion data to your affiliate network.
+title: Postback tracking in AdsBridge
+description: Pass conversion data to your affiliate network with AdsBridge S2S postback url.
 date: 2016-05-22T21:00:00Z
 tags:
   - Affiliate Marketing

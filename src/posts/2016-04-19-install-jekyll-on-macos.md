@@ -1,12 +1,11 @@
 ---
 title: Install Jekyll on macOS
-description: Learn how to install Jekyll static site generator on macOS using Homebrew.
+description: Memoirs of a legendary developer who once successfully installed Jekyll on the macOS operating system.
 date: 2016-04-19T22:00:00Z
 lastModified: 2019-03-22T16:15:00Z
 tags:
   - Jekyll
   - macOS
-  - Jamstack
 ---
 
 [Jekyll](https://jekyllrb.com/) is a tool for transforming your plain text into static websites and blogs. It is simple, static, and blog-aware. Jekyll uses the [Liquid templating language](https://docs.shopify.com/themes/liquid-basics){rel="nofollow"} and has built-in [Markdown](https://daringfireball.net/projects/markdown/){rel="nofollow"} and [Textile](<https://en.wikipedia.org/wiki/Textile_(markup_language)>){rel="nofollow"} support. It also ties in nicely to [Github Pages](https://pages.github.com/){rel="nofollow"} but I personal use [Netlify](https://www.netlify.com){rel="nofollow"} to host this website for free. I highly recommend you join [Jekyll Talk](https://talk.jekyllrb.com/){rel="nofollow"} the official support forum where you can ask questions and discuss all aspects of Jekyll.

@@ -1,31 +1,31 @@
 ---
 title: Generate a static website with Ghost
-description: Create a static website with Ghost using Buster static site generator. Then install GIT for version control of your website.
+description: Create a static website with Ghost using the Buster static site generator.
 date: 2016-02-15T14:00:00Z
-lastModified: 2016-04-20T11:56:00Z
 tags:
   - Jamstack
   - Ghost
 ---
 
-At the time I was looking for a blogging solution that would allow me to generate a static website that could be hosted on Amazon S3. I also liked the idea of being able to write in a split-screen editor with Markdown syntax on the left and a live preview on the right, rather than using a text editor.
+> **Note:** Ghost supports [Jamstack](https://ghost.org/changelog/jamstack/) as of January 2019. I recommend building your site statically from the Ghost API and using Ghost as a headless CMS.
+
+At the time (2016), I was looking for a blogging solution that would allow me to generate a static website that could be hosted on Amazon S3. I also liked the idea of being able to write in a split-screen editor with Markdown syntax on the left and a live preview on the right, rather than using a text editor.
 
 <blockquote cite="https://www.ghost.org">
   <p>Ghost is a platform dedicated to one thing: Publishing.</p>
   <footer>&ndash; John O'Nolan, <cite>Ghost Foundation</cite></footer>
 </blockquote>
 
-
 [Ghost](https://ghost.org){rel="nofollow"} is beautifully designed, completely customisable and completely Open Source. Ghost allows you to write and publish your own blog, giving you the tools to make it easy and even fun to do.
 
 This tutorial will cover the following steps
 
-* Installing Node.js locally on your computer.
-* Installing Ghost and how to login to Ghost admin.
-* Create a static website with Ghost using Buster Static Site Generator.
-* Installing GIT for version control of your static website. (Optional)
-* Hosting your static website on Amazon S3.
-* Setting up Cloudflare DNS and CDN.
+- Installing Node.js locally on your computer.
+- Installing Ghost and how to login to Ghost admin.
+- Create a static website with Ghost using Buster Static Site Generator.
+- Installing GIT for version control of your static website. (Optional)
+- Hosting your static website on Amazon S3.
+- Setting up Cloudflare DNS and CDN.
 
 ## Download and Install Node
 
@@ -260,14 +260,14 @@ You now need to setup your bucket for static website hosting. Click 'Properties'
 
 ```json
 {
-  "Version":"2012-10-17",
-  "Statement":[{
-  "Sid":"PublicReadForGetBucketObjects",
-        "Effect":"Allow",
-    "Principal": "*",
-      "Action":["s3:GetObject"],
-      "Resource":["arn:aws:s3:::example.com/*"
-      ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadForGetBucketObjects",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": ["s3:GetObject"],
+      "Resource": ["arn:aws:s3:::example.com/*"]
     }
   ]
 }
@@ -286,7 +286,6 @@ sudo npm install -g s3-upload
 ```
 
 Log into your AWS Console and go to the [Users management console](https://console.aws.amazon.com/iam/home?#users){rel="nofollow"}. Click the 'Create New Users' button and enter a username called after your domain name. AWS will create a new key pair for the user.
-
 
 Create a 'aws-credentials.json' file in your local Ghost static directory using the following commands in Terminal. You can also do this manually if you prefer using a [text editor](https://atom.io){rel="nofollow"}.
 
@@ -308,15 +307,15 @@ Open and edit the file
 nano aws-credentials.json
 ```
 
- Add your keys and the [correct region](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region){rel="nofollow"} that matches your bucket location. If you choose 'US Standard region' like i did earlier then your region is 'us-east-1'.
+Add your keys and the [correct region](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region){rel="nofollow"} that matches your bucket location. If you choose 'US Standard region' like i did earlier then your region is 'us-east-1'.
 
 Your 'aws-credentials.json' file should look like this when your finished.
 
 ```json
 {
-    "accessKeyId": "PUBLIC_KEY",
-    "secretAccessKey": "SECRET_KEY",
-    "region": "us-east-1"
+  "accessKeyId": "PUBLIC_KEY",
+  "secretAccessKey": "SECRET_KEY",
+  "region": "us-east-1"
 }
 ```
 
@@ -399,33 +398,33 @@ As a guide here is what my 'aws-upload.conf.js' file currently includes.
 
 ```js
 module.exports = {
-    credentials:"aws-credentials.json",
-    bucketName:"example.com",
-    patterns:[
-        "assets/css/screen.css",
-        "assets/fonts/casper-icons.eot",
-        "assets/fonts/casper-icons.svg",
-        "assets/fonts/casper-icons.ttf",
-        "assets/fonts/casper-icons.woff",
-        "assets/js/index.js",
-        "assets/js/jquery.fitvids.js",
-        "author/colin/index.html",
-        "favicon.ico",
-        "how-to-create-a-static-website-with-ghost/index.html",
-        "index.html",
-        "robots.txt",
-        "rss/index.html",
-        "sitemap-authors.xml",
-        "sitemap-pages.xml",
-        "sitemap-posts.xml",
-        "sitemap-tags.xml",
-        "sitemap.xml",
-        "sitemap.xsl",
-        "tag/amazon-s3/index.html",
-        "tag/ghost-tag/index.html",
-        "tag/static-website/index.html"
-    ]
-} 
+  credentials: "aws-credentials.json",
+  bucketName: "example.com",
+  patterns: [
+    "assets/css/screen.css",
+    "assets/fonts/casper-icons.eot",
+    "assets/fonts/casper-icons.svg",
+    "assets/fonts/casper-icons.ttf",
+    "assets/fonts/casper-icons.woff",
+    "assets/js/index.js",
+    "assets/js/jquery.fitvids.js",
+    "author/colin/index.html",
+    "favicon.ico",
+    "how-to-create-a-static-website-with-ghost/index.html",
+    "index.html",
+    "robots.txt",
+    "rss/index.html",
+    "sitemap-authors.xml",
+    "sitemap-pages.xml",
+    "sitemap-posts.xml",
+    "sitemap-tags.xml",
+    "sitemap.xml",
+    "sitemap.xsl",
+    "tag/amazon-s3/index.html",
+    "tag/ghost-tag/index.html",
+    "tag/static-website/index.html",
+  ],
+};
 ```
 
 Now its finally time to upload your static website files to your Amazon s3 bucket.

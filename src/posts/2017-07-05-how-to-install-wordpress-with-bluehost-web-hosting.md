@@ -1,6 +1,6 @@
 ---
-title: How to install WordPress with Bluehost web hosting
-description: How to install WordPress with Bluehost a highly recommended web hosting company. Learn how to buy Bluehost hosting and install WordPress in 5 minutes.
+title: Install WordPress with Bluehost
+description: How to setup WordPress with a 1-click installation on Bluehost, a highly recommended web hosting company.
 date: 2017-09-05T1:01:00Z
 lastModified: 2018-03-27T11:33:00Z
 tags:

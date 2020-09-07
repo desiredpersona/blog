@@ -1,9 +1,9 @@
 ---
-title: Deploy Jekyll to Firebase hosting
-description: How to host your Jekyll static websites on Firebase Hosting. Deploy your blog to a global content-delivery network (CDN) with a single command.
+title: Deploy Jekyll to Firebase Hosting
+description: Host Jekyll on Firebase's global content-delivery network (CDN).
 date: 2016-06-08T02:00:00Z
 lastModified: 2018-03-20T11:40:01Z
-tags: 
+tags:
   - Jekyll
   - Firebase
   - Web Hosting
@@ -28,8 +28,8 @@ Ready to get started?
 Sign in to the [Firebase Console](https://firebase.google.com){rel="nofollow"} and create a new project. You will be prompted to enter a ‘Project name’ and choose a ‘Country/region’.
 
 ## Install Xcode
-Go to the Mac app store and Install Xcode if you haven't already. Then install Xcode Command Line Tools with the follow command
 
+Go to the Mac app store and Install Xcode if you haven't already. Then install Xcode Command Line Tools with the follow command
 
 ```shell
 xcode-select --install
@@ -76,6 +76,7 @@ npm -v
 ```
 
 ## Installing the Firebase CLI
+
 Once you have Node.js and npm installed, you can then install the Firebase CLI via npm
 
 ```shell
@@ -88,7 +89,7 @@ When Firebase is finished installing you will need to login
 firebase login
 ```
 
-When prompted, allow Firebase to collect anonymous CLI usage information by typing <kbd>Y</kbd> in Terminal and hitting the <kbd>Return</kbd> key. Your browser will now automatically open to allow you to sign-in  to your Google account and accept some permissions.
+When prompted, allow Firebase to collect anonymous CLI usage information by typing <kbd>Y</kbd> in Terminal and hitting the <kbd>Return</kbd> key. Your browser will now automatically open to allow you to sign-in to your Google account and accept some permissions.
 
 ## Setting up a Firebase Project
 
@@ -120,18 +121,17 @@ You need to set `_site` to be used as your public directory.
 
 Type the letter <kbd>N</kbd> for No.
 
-**File _site/404.html already exists. Overwrite? (y/N)**
+**File \_site/404.html already exists. Overwrite? (y/N)**
 
 Type the letter <kbd>N</kbd> for No.
 
-**File _site/index.html already exists. Overwrite? (y/N)**
+**File \_site/index.html already exists. Overwrite? (y/N)**
 
 Type the letter <kbd>N</kbd> for No.
 
 **What Firebase project do you want to associate as default?**
 
 Choose your Firebase project folder that you created earlier in this tutorial from the list. Firebase initialization is now complete!
-
 
 ## Deploy your Website to Firebase
 
@@ -141,20 +141,12 @@ Open your ’firebase.json’ file located in your Jekyll website’s root direc
 {
   "hosting": {
     "public": "_site",
-    "ignore": [
-      "firebase.json",
-      "Gemfile",
-      "Gemfile.lock",
-      "Rakefile",
-      "CNAME",
-      "README.md"
-    ]
+    "ignore": ["firebase.json", "Gemfile", "Gemfile.lock", "Rakefile", "CNAME", "README.md"]
   }
 }
 ```
 
 You can find out more about the ‘firebase.json’ file settings in the [Firebase Documentation](https://firebase.google.com/docs/hosting/full-config#section-firebase-json){rel="nofollow"}.
-
 
 Just like Jekyll, Firebase has a built in server which allows you to preview your website locally using this command
 
@@ -173,9 +165,9 @@ firebase deploy
 You can view your live website by running `firebase open` in Terminal. Then select ‘Hosting: Deployed Site’ which will open your live website in a new browser window.
 
 ## Setup a Custom Domain with Free SSL
+
 Open the [Firebase Console](https://console.firebase.google.com){rel="nofollow"} and choose the Firebase project you just created.
 
 Then select **Hosting > Connect Domain** and enter your domain name when prompted.
 
 Finally you will need to update your domain names DNS settings at your registrar with the new TXT and CNAME records that Firebase provides.
-
