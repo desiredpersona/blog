@@ -2,65 +2,52 @@
 title: Google Analytics for Jekyll
 description: Add Google Analytics tracking script to a Jekyll website.
 date: 2016-04-21T10:00:00Z
-lastModified: 2018-02-21T18:03:00Z
+lastModified: 2020-11-14T17:37:00Z
 tags:
   - Jekyll
   - Google Analytics
   - Github Pages
 ---
 
-Google Analytics tracking is a free web analytics service offered by Google that tracks and reports website traffic. It’s really easy to add the tracking code to your Jekyll static website.
+Google Analytics tracking is a free web analytics service offered by Google that tracks and reports website traffic. In this tutorial, I will show you how to add the new Global Site Tag script to your Jekyll website.
 
-Login to [Google Analytics](https://www.google.com/analytics){rel="nofollow"} and create a new property to receive a tracking ID for your website. You will find your Universal Analytics tracking code under **Admin > Property > Tracking Info > Tracking Code**. Your tracking ID and property number are displayed at the top of the page.
+> The Global Site Tag provides streamlined tagging across Google’s site measurement, conversion tracking and remarketing products – giving you better control while making implementation easier. By using gtag.js, you will be able to benefit from the latest dynamic features and integrations as they become available.
 
-## Install Google Analytics Tracking Code
+Login to [Google Analytics](https://analytics.google.com/){rel="nofollow"} and create a new property to receive a Tracking ID for your website.
+
+## Install Google Analytics Tracking
 
 First create a new file called `analytics.html` in your site's `_includes` directory.
 
-Now paste the following Google Analytics tracking code in to your `analytics.html` file and save it.
+Now paste the following Global Site Tag (gtag.js) in to your `analytics.html` file and save it.
 
 ```js
-{% raw %}<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+{% raw %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', '{{ site.google_analytics }}', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', '{{ site.google_analytics }}');
 </script>{% endraw %}
 ```
 
-The JavaScript tracking snippet described above ensures the script will be loaded and executed asynchronously on all browsers, it has the disadvantage of not allowing modern browsers to preload the script.
+You will find the above Global Site Tag (gtag.js) under **Admin > Property > Tracking Info > Tracking Code**. Your Tracking ID is displayed at the top of the page.
 
-The alternative async tracking snippet below adds support for preloading, which will provide a small performance boost on modern browsers, but can degrade to synchronous loading and execution on IE 9 and older mobile browsers that do not recognize the async script attribute. Only use this tracking snippet if your visitors primarily use modern browsers to access your site.
+The `{% raw %}{{ site.google_analytics }}{% endraw %}` liquid object I have included above will allow you to set your unique Tracking ID in Jekyll's `_config.yml` file.
 
-```js
-{% raw %}<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', '{{ site.google_analytics }}', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>{% endraw %}
-```
+## Add your Google Analytics Tracking ID to Jekyll’s Config File
 
-The `{% raw %}{{ site.google_analytics }}{% endraw %}` liquid object included above will allow us to set our tracking ID in Jekyll's `_config` file.
-
-## Add Google Analytics Tracking ID to Jekyll’s Config File
-
-Open your sites `_config.yml` file and add the following lines of code. It is important to reference your own tracking ID, so replace `UA—XXXXXXXX-X` below with your websites unique tracking ID.
+Open your sites `_config.yml` file and add the following lines of code. It is important to reference your own Tracking ID, so replace `UA—XXXXXXXX-X` below with your websites unique Tracking ID.
 
 ```yaml
 # Google Analytics
 google_analytics: UA—XXXXXXXX-X
 ```
 
-Finally, Google recommends placing the code in the `<head>` section of your site, so that all visits to your website are tracked correctly.
+Finally, Google recommends placing this script in the `<head>` section of your site, so that all visits to your website are tracked correctly.
 
-Opened your `head.html` file which is normally located in your site's `_includes/` directory and paste the following code just before the end `</head>` tag.
-
-(**Important:** The code must go in the `<head>` section of your website so that all your pages are tracked correctly by Google. This `head.html` file name may vary depending on what Jekyll theme you are using.)
+This part may vary depending on what Jekyll theme you are using but you will need to paste the following code just before the end `</head>` tag. For you this could be a `head.html` file located in your site's `_includes/` directory or your `default.html` file in `_layouts/` directory.
 
 ```liquid
 {% raw %}{% if site.google_analytics and jekyll.environment == 'production' %}
@@ -72,15 +59,15 @@ In future, when you run `bundle exec jekyll serve` your Analytics tracking will 
 
 Great right?
 
-"But how do i setup Google Analytics to only track site visitors on a production environment?" I hear you say.
+"But how do I setup Google Analytics to only track site visitors on a production environment?" I hear you say.
 
 ## Setting Jekyll's Environment to Production
 
-We only need to add our Google Analytics script when Jekyll's environment = production. This prevents us from messing up our analytics with visits from our localhost development server.
+As I have mentioned, we only need to include Google's analytics script when Jekyll's environment is set to production. This prevents us from messing up our analytics with visits from our localhost development server.
 
 If you are using Github Pages to build your site, GitHub Pages will automatically set `jekyll.environment == 'production'` for you.
 
-If you are using another hosting provider or building your site locally, you will now need to prefix the build command with `JEKYLL_ENV=production` like so
+If you are using another hosting provider, you will now need to prefix the build command with `JEKYLL_ENV=production` like so
 
 ```shell
 JEKYLL_ENV=production bundle exec jekyll build
