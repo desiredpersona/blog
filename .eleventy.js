@@ -16,7 +16,7 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 */
 
 // Import global data file
-const site = require("./src/_data/site.json");
+const site = require("./src/_data/site.js");
 
 module.exports = function (config) {
   // https://www.11ty.dev/docs/data-deep-merge/
@@ -106,11 +106,7 @@ module.exports = function (config) {
 
   // https://github.com/kangax/html-minifier
   config.addTransform("htmlMin", function (value, outputPath) {
-    if (
-      process.env.ELEVENTY_ENV == "production" &&
-      outputPath &&
-      outputPath.indexOf(".html") > -1
-    ) {
+    if (process.env.ELEVENTY_ENV == "production" && outputPath && outputPath.indexOf(".html") > -1) {
       let minified = htmlMinifier.minify(value, {
         useShortDoctype: true,
         removeComments: true,
@@ -226,8 +222,7 @@ module.exports = function (config) {
 
     // https://www.npmjs.com/package/markdown-it-footnote
     .use(markdownItFootnote);
-  md.renderer.rules.footnote_block_open = () =>
-    "<hr>\n" + '<section class="fn">\n' + "<ol>\n";
+  md.renderer.rules.footnote_block_open = () => "<hr>\n" + '<section class="fn">\n' + "<ol>\n";
 
   config.setLibrary("md", md);
 
