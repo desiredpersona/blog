@@ -4,6 +4,7 @@ module.exports = {
   metaLocale: "en_IE",
   metaRobots: "index, follow",
   googleAnalytics: "",
+  cloudflareWebAnalytics: "5f0a2f27b63b4212b06c385016366939",
   title: "Desired Persona",
   url: "https://desiredpersona.com",
   author: "Desired Persona",
