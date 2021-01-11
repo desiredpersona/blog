@@ -93,8 +93,11 @@
   {% include "partials/footer.njk" %}
 
   <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
-  <!-- Cloudflare Web Analytics -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ site.cloudflareWebAnalytics }}"}'></script>
-  <!-- End Cloudflare Web Analytics -->
+  
+  {% if site.cloudflareWebAnalytics and site.environment == "production" %}
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ site.cloudflareWebAnalytics }}"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+  {% endif %}
 </body>
 </html>
