@@ -1,5 +1,5 @@
 ---
-title: Install Jekyll on macOS
+title: Install Jekyll on macOS Mojave
 description: Memoirs of a legendary developer who once successfully installed Jekyll on the macOS operating system.
 date: 2016-04-19T22:00:00Z
 lastModified: 2019-03-22T16:15:00Z
