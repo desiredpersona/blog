@@ -183,6 +183,7 @@ module.exports = function (config) {
 
   // Copies all files/folders to `/dist/` folder
   config.addPassthroughCopy("./src/assets/");
+  config.addPassthroughCopy("./src/favicons/");
   config.addPassthroughCopy("./src/feed.xml");
   config.addPassthroughCopy("./src/sitemap.xml");
   config.addPassthroughCopy("./src/netlify.toml");
