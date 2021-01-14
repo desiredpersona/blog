@@ -1,11 +1,13 @@
 const cleanCSS = require("clean-css");
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const htmlMinifier = require("html-minifier");
+const Image = require("@11ty/eleventy-img");
 const markdownIt = require("markdown-it");
 const markdownItAbbr = require("markdown-it-abbr");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require("markdown-it-attrs");
 const markdownItFootnote = require("markdown-it-footnote");
+const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 /*
@@ -181,13 +183,49 @@ module.exports = function (config) {
 
   */
 
-  // Copies all files/folders to `/dist/` folder
-  config.addPassthroughCopy("./src/assets/");
+  // Copies all files/folders to output directory
   config.addPassthroughCopy("./src/favicons/");
   config.addPassthroughCopy("./src/feed.xml");
   config.addPassthroughCopy("./src/sitemap.xml");
   config.addPassthroughCopy("./src/netlify.toml");
   config.addPassthroughCopy("./src/404.html");
+
+  /*
+
+    Shortcodes
+    https://www.11ty.dev/docs/shortcodes/
+
+  */
+
+  config.addNunjucksAsyncShortcode("image", imageShortcode);
+
+  async function imageShortcode(src, alt, sizes) {
+    let metadata = await Image(src, {
+      widths: [640, 1200, 1600, 1920],
+      formats: ["avif", "webp", "jpeg"],
+      urlPath: "/img/",
+      outputDir: "dist/img/",
+      filenameFormat: function (id, src, width, format, options) {
+        const extension = path.extname(src);
+        const name = path.basename(src, extension);
+
+        return `${name}-${width}w.${format}`;
+      },
+    });
+
+    let imageAttributes = {
+      alt,
+      sizes,
+      loading: "lazy",
+      decoding: "async",
+    };
+
+    // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
+    return Image.generateHTML(metadata, imageAttributes, {
+      // Strip the whitespace from the output of the <picture> element
+      whitespaceMode: "inline",
+    });
+  }
 
   /*
 
@@ -230,6 +268,7 @@ module.exports = function (config) {
   return {
     passthroughFileCopy: true,
     htmlTemplateEngine: "njk",
+    markdownTemplateEngine: "njk",
     dir: {
       input: "src",
       includes: "_includes",
