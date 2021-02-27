@@ -23,7 +23,7 @@ Ready to get started?
 
 ## Create a Google Firebase Account
 
-{% image "./src/img/firebase-hosting.png", "firebase hosting homepage" %}
+{% image "./src/img/firebase-hosting.png", "firebase hosting homepage", "100vw" %}
 
 Sign in to the [Firebase Console](https://firebase.google.com){rel="nofollow"} and create a new project. You will be prompted to enter a ‘Project name’ and choose a ‘Country/region’.
 

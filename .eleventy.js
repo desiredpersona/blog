@@ -201,7 +201,7 @@ module.exports = function (config) {
 
   async function imageShortcode(src, alt, sizes) {
     let metadata = await Image(src, {
-      widths: [640, 1200, 1600, 1920],
+      widths: [640, 1280, 1600, 1920],
       formats: ["avif", "webp", "jpeg"],
       urlPath: "/img/",
       outputDir: "dist/img/",
