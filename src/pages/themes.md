@@ -18,7 +18,7 @@ A minimal Eleventy starter created from first principles thinking. Now anyone ca
 
 [Free Download](https://github.com/desiredpersona/nostalgia)
 
-[Live Demo](/)
+[View Theme Demo](/)
 
 ## Minimal Jekyll Theme
 
@@ -26,4 +26,4 @@ Minimal is not about reducing a webpage to the fewest amount of components, but 
 
 [Free Download](https://github.com/desiredpersona/minimal-jekyll-theme)
 
-[Live Demo](https://desiredpersona.github.io/minimal-jekyll-theme/)
+[View Theme Demo](https://desiredpersona.github.io/minimal-jekyll-theme/)

@@ -7,7 +7,6 @@ tags:
   - Jekyll
   - Firebase
   - Web Hosting
-  - Jamstack
 ---
 
 Firebase Hosting is a developer focused static web hosting provider that is super fast, secure and reliable. You can quickly and easily deploy your static websites to a global content-delivery network (CDN) with a single command.

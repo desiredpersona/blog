@@ -1,5 +1,5 @@
 ---
-title: Install Jekyll on macOS Mojave
+title: Install Jekyll on macOS
 description: Memoirs of a legendary developer who once successfully installed Jekyll on the macOS operating system.
 date: 2016-04-19T22:00:00Z
 lastModified: 2019-03-22T16:15:00Z
@@ -16,13 +16,13 @@ Installing Jekyll is easy and straight-forward, but there are a few requirements
 
 Install the Xcode Command Line Tools using your Terminal app.
 
-```sh
+```shell
 xcode-select --install
 ```
 
 You also need to install the macOS SDK headers.
 
-```sh
+```shell
 open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
 ```
 
@@ -42,7 +42,7 @@ A lot of the system directories in macOS are locked down making it difficult to 
 
 Install Homebrew by entering the following command in your Terminal app and hitting the <kbd>Return</kbd> key.
 
-```sh
+```shell
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
@@ -254,7 +254,7 @@ Next, we will install Ruby using Homebrew. This route is recommended for most us
 
 Install the latest version of Ruby using Homebrew.
 
-```sh
+```shell
 brew install ruby
 ```
 
@@ -391,7 +391,7 @@ For compilers to find ruby you may need to set:
 
 Check the Ruby version to confirm a successful installation.
 
-```sh
+```shell
 ruby -v
 ```
 
@@ -403,7 +403,7 @@ ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
 
 We now need to update our `~/.bash_profile` file with the new `$PATH`, `$GEM_PATH` and `$GEM_HOME` paths. Open the file with the following command
 
-```sh
+```shell
 nano ~/.bash_profile
 ```
 
@@ -420,7 +420,7 @@ To exit press <kbd>CTRL</kbd> + <kbd>X</kbd> and then type the letter <kbd>Y</kb
 
 Next reload your `.bash_profile` from the command line.
 
-```sh
+```shell
 source ~/.bash_profile
 ```
 
@@ -435,7 +435,7 @@ As I mentioned earlier, the next section is only relevant to those developers wh
 
 Install rbenv with the following command using Homebrew.
 
-```sh
+```shell
 brew install rbenv
 ```
 
@@ -485,7 +485,7 @@ Emacs Lisp files have been installed to:
 
 Set up rbenv in your shell.
 
-```sh
+```shell
 rbenv init
 ```
 
@@ -502,19 +502,19 @@ eval "$(rbenv init -)"
 
 You can add the above line manually or run the following command to update your `.bash_profile` file.
 
-```sh
+```shell
 echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 ```
 
 Next reload your `.bash_profile` from the command line.
 
-```sh
+```shell
 source ~/.bash_profile
 ```
 
 Verify that rbenv is properly set up using this rbenv-doctor script:
 
-```sh
+```shell
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 ```
 
@@ -536,7 +536,7 @@ You can now list all available version of Ruby using `rbenv install -l`.
 
 Let's install the latest stable release which is currently `Ruby 2.6.2` as of writing.
 
-```sh
+```shell
 rbenv install 2.6.2
 ```
 
@@ -554,7 +554,7 @@ Installed ruby-2.6.2 to /Users/Colin/.rbenv/versions/2.6.2
 
 List all Ruby versions known to rbenv
 
-```sh
+```shell
 rbenv versions
 ```
 
@@ -569,13 +569,13 @@ MacBook-Pro:jekyll-test-site Colin$ rbenv versions
 
 Set the global version of Ruby.
 
-```sh
+```shell
 rbenv global 2.6.2
 ```
 
 Confirm your global version of Ruby is set.
 
-```sh
+```shell
 ruby -v
 ```
 
@@ -608,7 +608,7 @@ rm -rf /Users/Colin/.rbenv/versions/2.5.3
 
 Installing [Bundler](https://bundler.io){rel="nofollow"} provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
 
-```sh
+```shell
 gem install bundler
 ```
 
@@ -628,13 +628,13 @@ Done installing documentation for bundler after 3 seconds
 
 Finally it's time to install [Jekyll](https://jekyllrb.com) static site generator.
 
-```sh
+```shell
 gem install jekyll
 ```
 
 Check the Jekyll version.
 
-```sh
+```shell
 jekyll -v
 ```
 
