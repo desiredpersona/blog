@@ -2,16 +2,16 @@
   --base-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --code-font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --base-font-size: 1.125rem;
-  --small-font-size: 1rem;
+  --base-font-size: 1.25rem;
+  --small-font-size: 1.125rem;
   --code-font-size: 0.8em;
   --base-font-weight: 400;
   --base-line-height: 1.618;
   --content-width: 65ch;
   --text-color: #1d1d1f;
-  --background-color: #fff;
+  --background-color: #ffffff;
   --code-color: #1d1d1f;
-  --code-background-color: #f2f2f2;
+  --code-background-color: #f3f3f3;
   --link-color: #1d1d1f;
   --link-hover-color: #1e90ff;
   --tag-color: #1d1d1f;
@@ -284,6 +284,9 @@ footer {
 .pl ul {
   list-style: none;
   padding-left: 0;
+}
+.pl * + * {
+  margin-top: 4rem;
 }
 
 /* Post list title */
