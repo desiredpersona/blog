@@ -10,6 +10,9 @@ const markdownItFootnote = require("markdown-it-footnote");
 const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 
+/* Eleventy Upgrade Help V2 */
+const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
+
 /*
 
   Global data files
@@ -20,8 +23,8 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 // Import global data file
 const site = require("./src/_data/site.js");
 
-module.exports = function (config) {
-  // https://www.11ty.dev/docs/data-deep-merge/
+module.exports = function(config) {
+  // https://www.11ty.dev/docs/data-deep-merge/ Defaults to true in v1
   config.setDataDeepMerge(true);
 
   /*
@@ -37,6 +40,12 @@ module.exports = function (config) {
   // https://github.com/11ty/eleventy-plugin-rss
   config.addPlugin(pluginRss);
 
+  // Disable extensionless layouts
+  config.setLayoutResolution(false);
+
+  // If you have other `addPlugin` calls, it’s important that UpgradeHelper is added last.
+  config.addPlugin(UpgradeHelper);
+
   /*
 
     Filters
@@ -45,7 +54,7 @@ module.exports = function (config) {
   */
 
   // Minify CSS in production
-  config.addFilter("cssMin", function (code) {
+  config.addFilter("cssMin", function(code) {
     if (process.env.ELEVENTY_ENV == "production") {
       return new cleanCSS({}).minify(code).styles;
     }
@@ -53,7 +62,7 @@ module.exports = function (config) {
   });
 
   // ISO post datetime for search engines to read
-  config.addFilter("dateTime", function (value) {
+  config.addFilter("dateTime", function(value) {
     const dateObject = new Date(value);
     return dateObject.toISOString();
   });
@@ -65,7 +74,7 @@ module.exports = function (config) {
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
 
-  config.addFilter("ordinalDate", function (value) {
+  config.addFilter("ordinalDate", function(value) {
     const dateObject = new Date(value);
     const months = [
       "January",
@@ -93,7 +102,7 @@ module.exports = function (config) {
   });
 
   // Calculate blog posts reading time
-  config.addFilter("readingTime", function (text) {
+  config.addFilter("readingTime", function(text) {
     const wordsPerMinute = 200;
     const numberOfWords = text.split(/\s/g).length;
     return Math.ceil(numberOfWords / wordsPerMinute);
@@ -107,7 +116,7 @@ module.exports = function (config) {
   */
 
   // https://github.com/kangax/html-minifier
-  config.addTransform("htmlMin", function (value, outputPath) {
+  config.addTransform("htmlMin", function(value, outputPath) {
     if (process.env.ELEVENTY_ENV == "production" && outputPath && outputPath.indexOf(".html") > -1) {
       let minified = htmlMinifier.minify(value, {
         useShortDoctype: true,
@@ -128,18 +137,18 @@ module.exports = function (config) {
   */
 
   // Creates a list of blog post within `/posts/` folder in reverse chronological order
-  config.addCollection("posts", function (collection) {
+  config.addCollection("posts", function(collection) {
     return collection.getFilteredByGlob("./src/posts/*.md").reverse();
   });
 
   // Tags
-  config.addCollection("tagList", function (collection) {
+  config.addCollection("tagList", function(collection) {
     let tagSet = new Set();
-    collection.getAll().forEach(function (item) {
+    collection.getAll().forEach(function(item) {
       if ("tags" in item.data) {
         let tags = item.data.tags;
 
-        tags = tags.filter(function (item) {
+        tags = tags.filter(function(item) {
           switch (item) {
             // this list should match the `filter` list in tags.njk
             case "all":
@@ -170,11 +179,11 @@ module.exports = function (config) {
   */
 
   // https://www.11ty.dev/docs/layouts/#layout-aliasing
-  config.addLayoutAlias("archive", "layouts/archive.njk");
-  config.addLayoutAlias("base", "layouts/base.njk");
-  config.addLayoutAlias("blog", "layouts/blog.njk");
-  config.addLayoutAlias("page", "layouts/page.njk");
-  config.addLayoutAlias("post", "layouts/post.njk");
+  config.addLayoutAlias("archive.njk", "layouts/archive.njk");
+  config.addLayoutAlias("base.njk", "layouts/base.njk");
+  config.addLayoutAlias("blog.njk", "layouts/blog.njk");
+  config.addLayoutAlias("page.njk", "layouts/page.njk");
+  config.addLayoutAlias("post.njk", "layouts/post.njk");
 
   /*
 
@@ -205,7 +214,7 @@ module.exports = function (config) {
       formats: ["avif", "webp", "jpeg"],
       urlPath: "/img/",
       outputDir: "dist/img/",
-      filenameFormat: function (id, src, width, format, options) {
+      filenameFormat: function(id, src, width, format, options) {
         const extension = path.extname(src);
         const name = path.basename(src, extension);
 
@@ -251,9 +260,9 @@ module.exports = function (config) {
         placement: "after",
         class: "al",
         symbol: "#",
-        level: [1,2,3,4],
+        level: [1, 2, 3, 4],
       }),
-      slugify: config.getFilter("slug")
+      slugify: config.getFilter("slugify"),
     })
 
     // https://www.npmjs.com/package/markdown-it-attrs
