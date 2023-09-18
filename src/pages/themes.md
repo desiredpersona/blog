@@ -1,4 +1,5 @@
 ---
+layout: page.njk
 title: Themes
 description: Themes for Eleventy and Jekyll designed by @desiredpersona
 permalink: themes/index.html

@@ -1,4 +1,5 @@
 ---
+layout: page.njk
 title: Contact
 description: Contact Desired Persona
 permalink: contact/index.html
