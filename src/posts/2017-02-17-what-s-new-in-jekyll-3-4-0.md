@@ -6,6 +6,8 @@ tags:
   - Jekyll
 ---
 
+*This was originally a guest post written for the Forestry.io blog. The Forestry.io team is now focused on building [TinaCMS](https://tina.io)*
+
 Jekyll 3.4.0 was release on the 27th of January 2017 with some noteworthy enhancements that I'd like to share with you.
 
 So what's new?
