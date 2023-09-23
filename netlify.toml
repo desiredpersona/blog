@@ -31,3 +31,8 @@
   from = "/writings/"
   to = "/"
   status = 301
+
+[[redirects]]
+  from = "/what-s-new-in-jekyll-3-4-0/"
+  to = "/what-s-new-in-jekyll-3-4/"
+  status = 301
