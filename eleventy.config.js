@@ -198,6 +198,7 @@ module.exports = function(config) {
   config.addPassthroughCopy("./src/sitemap.xml");
   config.addPassthroughCopy("./src/netlify.toml");
   config.addPassthroughCopy("./src/404.html");
+  config.addPassthroughCopy("./src/robots.txt");
 
   /*
 
