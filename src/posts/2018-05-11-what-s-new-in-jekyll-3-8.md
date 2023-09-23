@@ -8,7 +8,7 @@ tags:
 
 *This was originally a guest post written for the Forestry.io blog. The Forestry.io team is now focused on building [TinaCMS](https://tina.io)*
 
-Jekyll 3.8.1 was released on the 1st of May 2018, just two weeks after 3.8.0. The project has come a long way since I last wrote a [Jekyll update](https://desiredpersona.com/what-s-new-in-jekyll-3-4-0/). Olivia is now Jekyll’s new [Lead Developer](https://jekyllrb.com/news/2018/02/19/meet-jekyll-s-new-lead-developer/) since Parker Moore decided to step down after four years leading the project.
+Jekyll 3.8.1 was released on the 1st of May 2018, just two weeks after 3.8.0. The project has come a long way since I last wrote a [Jekyll update](https://desiredpersona.com/what-s-new-in-jekyll-3-4/). Olivia is now Jekyll’s new [Lead Developer](https://jekyllrb.com/news/2018/02/19/meet-jekyll-s-new-lead-developer/) since Parker Moore decided to step down after four years leading the project.
 
 So what does Jekyll bring us this time?
 
