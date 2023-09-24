@@ -30,7 +30,7 @@ Now it takes around 112s with 3.8.0. That’s a 20% decrease!
 
 Your mileage may vary depending on your layouts, the plugins used, and the size of your website.
 
-[My minimal and tiny blog](http://desiredpersona.com/) now builds  in 1.76 seconds which is merely 0.02 seconds faster on average. Don’t expect a major speed improvement for such a small website.
+[My minimal and tiny blog](https://desiredpersona.com/) now builds  in 1.76 seconds which is merely 0.02 seconds faster on average. Don’t expect a major speed improvement for such a small website.
 
 ## Ordinal dates support
 
