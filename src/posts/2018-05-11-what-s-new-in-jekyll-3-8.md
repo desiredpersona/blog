@@ -1,5 +1,6 @@
 ---
 title: What's new in Jekyll 3.8
+permalink: "/what-s-new-in-jekyll-3-8/"
 description: Let's take a look at all the new features available in Jekyll 3.8.0
 date: 2018-05-11T09:00:00Z
 tags:

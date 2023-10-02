@@ -1,5 +1,6 @@
 ---
 title: Deploy Jekyll to Firebase Hosting
+permalink: "/firebase-hosting-jekyll/"
 description: Host Jekyll on Firebase's global content-delivery network (CDN).
 date: 2016-06-08T02:00:00Z
 lastModified: 2018-03-20T11:40:01Z

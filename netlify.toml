@@ -8,31 +8,37 @@
   status = 301
 
 [[redirects]]
-  from = "/open-source/"
-  to = "/themes/"
-  status = 301
-
-[[redirects]]
   from = "/install-jekyll/"
   to = "/install-jekyll-on-macos/"
   status = 301
 
 [[redirects]]
   from = "/google-firebase-hosting-jekyll/"
-  to = "/jekyll-firebase-hosting/"
+  to = "/firebase-hosting-jekyll/"
   status = 301
 
 [[redirects]]
-  from = "/how-to-install-wordpress-hosting/"
-  to = "/how-to-install-wordpress-with-bluehost-web-hosting/"
+  from = "/jekyll-firebase-hosting/"
+  to = "/firebase-hosting-jekyll/"
   status = 301
 
-[[redirects]]
-  from = "/writings/"
-  to = "/"
-  status = 301
-
+# Temporary Redirects
 [[redirects]]
   from = "/what-s-new-in-jekyll-3-4-0/"
   to = "/what-s-new-in-jekyll-3-4/"
   status = 301
+
+[[redirects]]
+from = "/google-analytics-for-jekyll/"
+to = "/google-analytics-jekyll/"
+status = 301
+
+[[redirects]]
+from = "/disqus-comments-setup-for-jekyll/"
+to = "/disqus-comments-jekyll/"
+status = 301
+
+[[redirects]]
+from = "/how-to-create-a-static-website-with-ghost/"
+to = "/static-website-with-ghost/"
+status = 301

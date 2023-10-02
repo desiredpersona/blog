@@ -1,5 +1,6 @@
 ---
 title: Disqus comments setup for Jekyll
+permalink: "/disqus-comments-jekyll/"
 description: Install Disqus comments plug-in on a Jekyll blog.
 date: 2016-05-11T22:30:00Z
 lastModified: 2019-07-14T14:52:00Z

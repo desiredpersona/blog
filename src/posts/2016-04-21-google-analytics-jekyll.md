@@ -1,5 +1,6 @@
 ---
 title: Google Analytics for Jekyll
+permalink: "/google-analytics-jekyll/"
 description: Add Google Analytics tracking script to a Jekyll website.
 date: 2016-04-21T10:00:00Z
 lastModified: 2020-11-14T17:37:00Z

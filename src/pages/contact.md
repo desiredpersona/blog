@@ -2,7 +2,7 @@
 layout: page.njk
 title: Contact
 description: Contact Desired Persona
-permalink: contact/index.html
+permalink: "/contact/"
 eleventyNavigation:
   key: contact
   order: 3

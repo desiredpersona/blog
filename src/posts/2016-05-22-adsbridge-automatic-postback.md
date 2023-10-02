@@ -1,5 +1,6 @@
 ---
 title: Postback tracking in AdsBridge
+permalink: "/adsbridge-automatic-postback/"
 description: Pass conversion data to your affiliate network with AdsBridge S2S postback url.
 date: 2016-05-22T21:00:00Z
 tags:

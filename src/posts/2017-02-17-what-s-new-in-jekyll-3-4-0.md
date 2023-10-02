@@ -1,5 +1,6 @@
 ---
 title: What's new in Jekyll 3.4
+permalink: "/what-s-new-in-jekyll-3-4/"
 description: Jekyll 3.4.0 was released with some noteworthy enhancements.
 date: 2017-02-20T09:00:00Z
 tags:

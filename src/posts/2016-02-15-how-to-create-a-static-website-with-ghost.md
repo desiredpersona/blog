@@ -1,5 +1,6 @@
 ---
 title: Generate a static website with Ghost
+permalink: "/static-website-with-ghost/"
 description: Create a static website with Ghost using the Buster static site generator.
 date: 2016-02-15T14:00:00Z
 tags:
