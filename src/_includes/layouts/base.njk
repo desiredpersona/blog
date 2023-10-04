@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Meta robots -->
   {% if site.environment == "development" %}
     <!-- Disallow search engines in development -->
@@ -19,10 +19,10 @@
     {% endif %}
   {% endif %}
 
-  <title>{% if title %}{{ title }} &ndash; {% endif %}{{ site.title }}</title>
+  <title>{{ title or site.title }}</title>
   <meta name="author" content="{{ author or site.author }}">
   <meta name="description" content="{{ description }}">
-  
+
   <!-- Open Graph protocol -->
   {% if layout == "post" %}
     <meta property="og:type" content="blog">
@@ -93,7 +93,7 @@
   {% include "partials/footer.njk" %}
 
   <script src="//instant.page/5.1.0" type="module" integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
-  
+
   {% if site.cloudflareWebAnalytics and site.environment == "production" %}
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ site.cloudflareWebAnalytics }}"}'></script>
