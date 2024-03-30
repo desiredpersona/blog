@@ -7,7 +7,7 @@ tags:
   - Jekyll
 ---
 
-*This was originally a guest post written for the Forestry.io blog. The Forestry.io team is now focused on building [TinaCMS](https://tina.io)*
+*This was originally a guest post written for the [Forestry.io blog](https://tina.io)*
 
 At the time of writing, Jekyll’s performance is still actively being worked on by the Core Team for an upcoming version 4 release. One of the main complaints about Jekyll for users is often the build times of larger websites. I want to take this opportunity to see just how much I can expect to improve my current site's build times by using the latest master branch.
 
