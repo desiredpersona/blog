@@ -23,7 +23,7 @@ const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
 // Import global data file
 const site = require("./src/_data/site.js");
 
-module.exports = function(config) {
+module.exports = function (config) {
   // https://www.11ty.dev/docs/data-deep-merge/ Defaults to true in v1
   config.setDataDeepMerge(true);
 
@@ -54,7 +54,7 @@ module.exports = function(config) {
   */
 
   // Minify CSS in production
-  config.addFilter("cssMin", function(code) {
+  config.addFilter("cssMin", function (code) {
     if (process.env.ELEVENTY_ENV == "production") {
       return new cleanCSS({}).minify(code).styles;
     }
@@ -62,7 +62,7 @@ module.exports = function(config) {
   });
 
   // ISO post datetime for search engines to read
-  config.addFilter("dateTime", function(value) {
+  config.addFilter("dateTime", function (value) {
     const dateObject = new Date(value);
     return dateObject.toISOString();
   });
@@ -74,7 +74,7 @@ module.exports = function(config) {
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
 
-  config.addFilter("ordinalDate", function(value) {
+  config.addFilter("ordinalDate", function (value) {
     const dateObject = new Date(value);
     const months = [
       "January",
@@ -102,7 +102,7 @@ module.exports = function(config) {
   });
 
   // Calculate blog posts reading time
-  config.addFilter("readingTime", function(text) {
+  config.addFilter("readingTime", function (text) {
     const wordsPerMinute = 200;
     const numberOfWords = text.split(/\s/g).length;
     return Math.ceil(numberOfWords / wordsPerMinute);
@@ -116,8 +116,12 @@ module.exports = function(config) {
   */
 
   // https://github.com/kangax/html-minifier
-  config.addTransform("htmlMin", function(value, outputPath) {
-    if (process.env.ELEVENTY_ENV == "production" && outputPath && outputPath.indexOf(".html") > -1) {
+  config.addTransform("htmlMin", function (value, outputPath) {
+    if (
+      process.env.ELEVENTY_ENV == "production" &&
+      outputPath &&
+      outputPath.indexOf(".html") > -1
+    ) {
       let minified = htmlMinifier.minify(value, {
         useShortDoctype: true,
         removeComments: true,
@@ -137,18 +141,18 @@ module.exports = function(config) {
   */
 
   // Creates a list of blog post within `/posts/` folder in reverse chronological order
-  config.addCollection("posts", function(collection) {
+  config.addCollection("posts", function (collection) {
     return collection.getFilteredByGlob("./src/posts/*.md").reverse();
   });
 
   // Tags
-  config.addCollection("tagList", function(collection) {
+  config.addCollection("tagList", function (collection) {
     let tagSet = new Set();
-    collection.getAll().forEach(function(item) {
+    collection.getAll().forEach(function (item) {
       if ("tags" in item.data) {
         let tags = item.data.tags;
 
-        tags = tags.filter(function(item) {
+        tags = tags.filter(function (item) {
           switch (item) {
             // this list should match the `filter` list in tags.njk
             case "all":
@@ -196,7 +200,7 @@ module.exports = function(config) {
   config.addPassthroughCopy("./src/favicons/");
   config.addPassthroughCopy("./src/feed.xml");
   config.addPassthroughCopy("./src/sitemap.xml");
-  config.addPassthroughCopy("./src/netlify.toml");
+  config.addPassthroughCopy("./src/_redirects");
   config.addPassthroughCopy("./src/404.html");
   config.addPassthroughCopy("./src/robots.txt");
 
@@ -215,7 +219,7 @@ module.exports = function(config) {
       formats: ["avif", "webp", "jpeg"],
       urlPath: "/img/",
       outputDir: "dist/img/",
-      filenameFormat: function(id, src, width, format, options) {
+      filenameFormat: function (id, src, width, format, options) {
         const extension = path.extname(src);
         const name = path.basename(src, extension);
 
@@ -273,7 +277,8 @@ module.exports = function(config) {
 
     // https://www.npmjs.com/package/markdown-it-footnote
     .use(markdownItFootnote);
-  md.renderer.rules.footnote_block_open = () => "<hr>\n" + '<section class="fn">\n' + "<ol>\n";
+  md.renderer.rules.footnote_block_open = () =>
+    "<hr>\n" + '<section class="fn">\n' + "<ol>\n";
 
   config.setLibrary("md", md);
 
