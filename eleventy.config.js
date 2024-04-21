@@ -44,7 +44,7 @@ module.exports = function (config) {
   config.setLayoutResolution(false);
 
   // If you have other `addPlugin` calls, it’s important that UpgradeHelper is added last.
-  config.addPlugin(UpgradeHelper);
+  //config.addPlugin(UpgradeHelper);
 
   /*
 
