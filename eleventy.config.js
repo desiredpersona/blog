@@ -11,7 +11,7 @@ const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 /* Eleventy Upgrade Help V2 */
-const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
+// const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
 
 /*
 
