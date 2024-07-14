@@ -8,7 +8,7 @@ eleventyNavigation:
   order: 2
 ---
 
-Get notified when I release new themes. Follow [@desiredpersona](https://twitter.com/desiredpersona)
+Get notified when I release new themes. Follow [@desiredpersona](https://x.com/desiredpersona)
 
 ---
 
