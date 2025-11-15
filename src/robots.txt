@@ -1,9 +1,6 @@
 User-agent: *
 Allow: /
 
-User-agent: GPTBot
-Disallow: /
-
 Host: https://desiredpersona.com/
 
 Sitemap: https://desiredpersona.com/sitemap.xml
