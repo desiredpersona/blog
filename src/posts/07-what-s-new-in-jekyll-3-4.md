@@ -7,7 +7,7 @@ tags:
   - Jekyll
 ---
 
-*This was originally a guest post written for the [Forestry.io blog](https://tina.io)*
+*This was originally a guest post written for [forestry.io](https://tina.io/?ref=https://desiredpersona.com)*
 
 Jekyll 3.4.0 was release on the 27th of January 2017 with some noteworthy enhancements that I'd like to share with you.
 

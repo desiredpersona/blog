@@ -7,7 +7,7 @@ tags:
   - Jekyll
 ---
 
-*This was originally a guest post written for the [Forestry.io blog](https://tina.io)*
+*This was originally a guest post written for [forestry.io](https://tina.io/?ref=https://desiredpersona.com)*
 
 Jekyll 3.8.1 was released on the 1st of May 2018, just two weeks after 3.8.0. The project has come a long way since I last wrote a [Jekyll update](https://desiredpersona.com/what-s-new-in-jekyll-3-4/). Olivia is now Jekyll’s new [Lead Developer](https://jekyllrb.com/news/2018/02/19/meet-jekyll-s-new-lead-developer/) since Parker Moore decided to step down after four years leading the project.
 
