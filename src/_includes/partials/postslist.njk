@@ -1,0 +1,30 @@
+<div class="pl">
+  <ul>
+    {%- for post in postslist | reverse %}
+    <li>
+      <article>
+        {% if dates %}
+        {% set date = post.data.date %}
+        <span class="plm pm">
+          <time datetime="{{ post.date | dateTime }}">{{ date | ordinalDate }}</time>
+        </span>
+        {% endif %}
+
+        {% if post.data.canonical %}
+        <a href="{{ post.data.canonical }}" target="_blank" rel="external noopener">
+          <h3 class="plt ext">{{ post.data.title | escape }}</h3>
+        </a>
+        {% else %}
+        <a href="{{ post.url }}">
+          <h3 class="plt">{{ post.data.title | escape }}</h3>
+        </a>
+        {% endif %}
+
+        {% if excerpts %}
+        <p class="ple">{{ post.data.description }}</p>
+        {% endif %}
+      </article>
+    </li>
+    {%- endfor -%}
+  </ul>
+</div>
