@@ -67,10 +67,15 @@
   {% endif %}
 
   <!-- CSS stylesheet -->
-  {% set css %}
-    {% include "css/nostalgia.css" %}
+  <!-- Critical CSS: Inlined for fast first paint -->
+  {% set criticalCss %}
+    {% include "css/critical.css" %}
   {% endset %}
-  <style>{{ css | cssMin | safe }}</style>
+  <style>{{ criticalCss | cssMin | safe }}</style>
+
+  <!-- Full CSS: Preloaded and loaded asynchronously -->
+  <link rel="preload" href="/css/nostalgia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/nostalgia.css"></noscript>
 
   <!-- Feed -->
   <link rel="alternate" href="{{ site.feed.path | url }}" title="{{ site.title }}" type="application/atom+xml">

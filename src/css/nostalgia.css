@@ -1,0 +1,774 @@
+/*
+ * Nostalgia CSS
+ * A minimal, readable stylesheet with fluid typography
+ * ========================================================================== */
+
+/* ==========================================================================
+   CSS Custom Properties
+   ========================================================================== */
+
+:root {
+    /*
+     * Typography Scale
+     * Using clamp() for fluid typography that scales smoothly between viewports
+     * Format: clamp(min, preferred, max)
+     */
+    --font-size-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+    --font-size-base: clamp(1.0625rem, 0.95rem + 0.5vw, 1.25rem);
+    --font-size-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --font-size-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+    --font-size-2xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.75rem);
+
+    /* Line Heights - tighter on mobile where lines are shorter */
+    --line-height-tight: 1.3;
+    --line-height-base: 1.75;
+    --line-height-relaxed: 1.85;
+
+    /* Font Families */
+    --font-sans:
+        system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+
+    /* Font Weights */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+
+    /* Spacing Scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* Layout */
+    --content-width: 65ch;
+    --content-padding: clamp(1rem, 5vw, 2rem);
+
+    /* Colors */
+    --color-text: #1d1d1f;
+    --color-text-muted: #6e6e73;
+    --color-bg: #ffffff;
+    --color-bg-subtle: #f5f5f7;
+    --color-border: #e5e5e5;
+    --color-link: #1d1d1f;
+    --color-link-hover: #0066cc;
+    --color-code-bg: #f3f3f3;
+    --color-highlight: #fff3cd;
+
+    /* Semantic Colors */
+    --color-del: #ffeef0;
+    --color-ins: #e6ffed;
+}
+
+/* ==========================================================================
+   Base Reset & Box Sizing
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Remove list styles on ul, ol with class */
+ul[class],
+ol[class] {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Inherit fonts for form elements */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* ==========================================================================
+   Document & Body
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+    /* Prevent font size inflation on mobile */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-base);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+
+    /* CSS Grid layout */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    gap: var(--space-xl) 0;
+
+    min-height: 100vh;
+    padding: var(--content-padding);
+
+    /* Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Layout Structure
+   ========================================================================== */
+
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+    align-self: end;
+    padding-block: var(--space-md);
+}
+
+/* Center content on larger screens */
+@media (min-width: 720px) {
+    body {
+        grid-template-columns: 1fr min(var(--content-width), 100%) 1fr;
+        grid-template-areas:
+            ". header ."
+            ". main ."
+            ". footer .";
+    }
+
+    header,
+    main,
+    footer {
+        grid-column: 2;
+    }
+
+    /* Slightly more relaxed line height on desktop */
+    body {
+        line-height: var(--line-height-relaxed);
+    }
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-lg);
+    padding: 0;
+    padding-inline-start: 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav > ul > li {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    padding-block: var(--space-sm);
+}
+
+nav a:hover {
+    color: var(--color-link-hover);
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-bold);
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: var(--font-size-2xl);
+    margin-block-end: var(--space-lg);
+}
+
+h2 {
+    font-size: var(--font-size-xl);
+    margin-block: var(--space-2xl) var(--space-md);
+}
+
+h3 {
+    font-size: var(--font-size-lg);
+    margin-block: var(--space-xl) var(--space-md);
+}
+
+h4,
+h5,
+h6 {
+    font-size: var(--font-size-base);
+    margin-block: var(--space-lg) var(--space-sm);
+}
+
+/* Paragraphs & Flow */
+p {
+    text-wrap: pretty;
+}
+
+p + p {
+    margin-block-start: var(--space-md);
+}
+
+/* Article content flow */
+article > * + * {
+    margin-block-start: var(--space-md);
+}
+
+article > h2 + *,
+article > h3 + *,
+article > h4 + * {
+    margin-block-start: var(--space-sm);
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+a {
+    color: var(--color-link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+/* Links without a class get enhanced styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* ==========================================================================
+   Images & Media
+   ========================================================================== */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+img[width] {
+    width: auto;
+}
+
+img[width][height] {
+    height: auto;
+}
+
+/* SVG images scale without boundaries */
+img[src$=".svg"] {
+    width: 100%;
+    max-width: none;
+}
+
+/* Visual indicator for missing alt text */
+img:not([alt]) {
+    outline: 3px dashed var(--color-link-hover);
+}
+
+figure {
+    margin-block: var(--space-xl);
+}
+
+figcaption {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-block-start: var(--space-sm);
+}
+
+/* ==========================================================================
+   Code & Preformatted Text
+   ========================================================================== */
+
+code,
+kbd,
+samp {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+}
+
+code {
+    background-color: var(--color-code-bg);
+    border-radius: 3px;
+    padding: 0.125em 0.375em;
+}
+
+/* Code blocks */
+pre {
+    background-color: var(--color-code-bg);
+    border-radius: 6px;
+    overflow-x: auto;
+    padding: var(--space-md);
+    margin-block: var(--space-lg);
+    /* Ensure long lines don't break layout */
+    max-width: 100%;
+}
+
+pre > code {
+    background: none;
+    padding: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   Syntax Highlighting (PrismJS)
+   ========================================================================== */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #6a737d;
+    font-style: italic;
+}
+
+.token.punctuation {
+    color: #24292e;
+}
+
+.token.namespace {
+    opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #005cc5;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #22863a;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #d73a49;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #d73a49;
+}
+
+.token.function,
+.token.class-name {
+    color: #6f42c1;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e36209;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+/* Diff highlighting */
+.token.deleted {
+    background-color: var(--color-del);
+}
+
+.token.inserted {
+    background-color: var(--color-ins);
+}
+
+/* Line numbers (optional) */
+.line-numbers .line-numbers-rows {
+    border-right: 1px solid var(--color-border);
+    padding-right: var(--space-sm);
+    margin-right: var(--space-md);
+}
+
+kbd {
+    border: 1.5px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.125em 0.375em;
+}
+
+/* ==========================================================================
+   Blockquotes
+   ========================================================================== */
+
+blockquote {
+    border-inline-start: 3px solid var(--color-text);
+    font-size: var(--font-size-lg);
+    font-style: italic;
+    margin-block: var(--space-xl);
+    padding-inline-start: var(--space-lg);
+}
+
+blockquote > footer {
+    font-style: normal;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-block-start: var(--space-md);
+}
+
+blockquote cite {
+    font-style: normal;
+}
+
+/* ==========================================================================
+   Horizontal Rules
+   ========================================================================== */
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--color-border);
+    margin-block: var(--space-2xl);
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: var(--space-xl);
+    font-size: var(--font-size-sm);
+}
+
+th,
+td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+th {
+    font-weight: var(--font-weight-bold);
+}
+
+/* Make tables scrollable on mobile */
+@media (max-width: 720px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ==========================================================================
+   Text Formatting
+   ========================================================================== */
+
+del {
+    background-color: var(--color-del);
+    padding-inline: 2px;
+}
+
+ins {
+    background-color: var(--color-ins);
+    padding-inline: 2px;
+    text-decoration: none;
+}
+
+mark {
+    background-color: var(--color-highlight);
+    padding-inline: 2px;
+}
+
+small {
+    font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+
+ul,
+ol {
+    padding-inline-start: var(--space-lg);
+}
+
+article :not(.t) > li + li,
+main > ul li + li,
+main > ol li + li {
+    margin-block-start: var(--space-sm);
+}
+
+li > ul,
+li > ol {
+    margin-block-start: var(--space-sm);
+}
+
+/* ==========================================================================
+   Component: Post Title
+   ========================================================================== */
+
+.pt {
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-tight);
+    margin-block-start: var(--space-sm);
+}
+
+/* ==========================================================================
+   Component: Post Meta
+   ========================================================================== */
+
+.pm {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
+   Component: Post List
+   ========================================================================== */
+
+.pl ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Gap between each post in the list */
+.pl ul > li + li {
+    margin-block-start: var(--space-2xl);
+}
+
+.plm {
+    display: block;
+    margin-block-end: var(--space-xs);
+}
+
+.plt {
+    font-size: var(--font-size-lg);
+    margin: 0;
+}
+
+.ple {
+    color: var(--color-text-muted);
+    margin-block-start: var(--space-sm);
+}
+
+/* External link indicator */
+.ext::after {
+    content: "↗";
+    display: inline-block;
+    margin-inline-start: var(--space-sm);
+    font-size: 0.8em;
+}
+
+/* ==========================================================================
+   Component: Pagination
+   ========================================================================== */
+
+.pp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-block: var(--space-xl);
+}
+
+/* ==========================================================================
+   Component: Tags
+   ========================================================================== */
+
+.t {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0;
+    list-style: none;
+    margin-block: var(--space-2xl) var(--space-lg);
+}
+
+/* Override article > * + * spacing for tags */
+article > .t {
+    margin-block-start: var(--space-2xl);
+}
+
+.t li {
+    display: inline-block;
+}
+
+.t a {
+    display: inline-block;
+    background-color: var(--color-bg-subtle);
+    border-radius: 2em;
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+
+.t a:hover {
+    background-color: var(--color-border);
+    color: var(--color-text);
+}
+
+/* ==========================================================================
+   Component: Footnotes
+   ========================================================================== */
+
+.fn {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.fn ol {
+    padding-inline-start: var(--space-lg);
+}
+
+/* ==========================================================================
+   Component: Anchor Links (markdown-it-anchor)
+   ========================================================================== */
+
+.al {
+    color: transparent;
+    text-decoration: none;
+    margin-inline-start: var(--space-sm);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.al:hover {
+    color: var(--color-link-hover);
+}
+
+/* Show anchor on heading hover */
+h1:hover .al,
+h2:hover .al,
+h3:hover .al,
+h4:hover .al {
+    opacity: 1;
+    color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+.hidden {
+    display: none;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.875em;
+    }
+
+    pre,
+    blockquote {
+        page-break-inside: avoid;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        page-break-after: avoid;
+    }
+}
