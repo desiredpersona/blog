@@ -1,26 +1,46 @@
-module.exports = {
+export default {
+  // Environment
   environment: process.env.ELEVENTY_ENV,
-  metaLang: "en",
-  metaLocale: "en_IE",
-  metaRobots: "index, follow",
-  googleAnalytics: "",
-  cloudflareWebAnalytics: "5f0a2f27b63b4212b06c385016366939",
+
+  // Site metadata
   title: "Desired Persona",
   url: "https://desiredpersona.com",
   author: "Desired Persona",
   email: "",
+
+  // Language and locale settings
+  metaLang: "en",
+  metaLocale: "en_IE",
+  metaRobots: "index, follow",
+
+  // Analytics
+  googleAnalytics: "",
+
+  // Social media
   twitterCreator: "@desiredpersona",
   twitterSite: "@desiredpersona",
+
+  // RSS/Atom feed configuration
+  // Used by @11ty/eleventy-plugin-rss and templates
   feed: {
-    subtitle: "Blog feed",
-    filename: "feed.xml",
+    // Used by templates (e.g., base.njk for <link rel="alternate">)
     path: "/feed.xml",
-    url: "https://desiredpersona.com/feed.xml",
-    id: "https://desiredpersona.com",
+    subtitle: "Blog feed",
+
+    // Plugin-specific settings
+    type: "atom", // Options: "atom", "rss", "json"
+    collection: {
+      name: "posts",
+      limit: 0, // 0 means no limit
+    },
   },
+
+  // Post display settings
   post: {
     readingTime: true,
   },
+
+  // UI text strings (for easy localization)
   text: {
     previous: "← Previous page",
     next: "Next page →",

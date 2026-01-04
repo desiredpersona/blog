@@ -1,31 +1,19 @@
-const cleanCSS = require("clean-css");
-const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
-const htmlMinifier = require("html-minifier");
-const Image = require("@11ty/eleventy-img");
-const markdownIt = require("markdown-it");
-const markdownItAbbr = require("markdown-it-abbr");
-const markdownItAnchor = require("markdown-it-anchor");
-const markdownItAttrs = require("markdown-it-attrs");
-const markdownItFootnote = require("markdown-it-footnote");
-const path = require("path");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
+import CleanCSS from "clean-css";
+import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
+import site from "./src/_data/site.js";
+import Image from "@11ty/eleventy-img";
+import markdownIt from "markdown-it";
+import markdownItAbbr from "markdown-it-abbr";
+import markdownItAnchor from "markdown-it-anchor";
+import markdownItAttrs from "markdown-it-attrs";
+import markdownItFootnote from "markdown-it-footnote";
+import path from "path";
+import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
-/* Eleventy Upgrade Help V2 */
-// const UpgradeHelper = require("@11ty/eleventy-upgrade-help");
-
-/*
-
-  Global data files
-  https://www.11ty.dev/docs/data-global/
-
-*/
-
-// Import global data file
-const site = require("./src/_data/site.js");
-
-module.exports = function (config) {
+export default function (eleventyConfig) {
   // https://www.11ty.dev/docs/data-deep-merge/ Defaults to true in v1
-  config.setDataDeepMerge(true);
+  eleventyConfig.setDataDeepMerge(true);
 
   /*
 
@@ -35,13 +23,31 @@ module.exports = function (config) {
   */
 
   // https://github.com/11ty/eleventy-navigation
-  config.addPlugin(eleventyNavigationPlugin);
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
+
+  // https://github.com/11ty/eleventy-plugin-syntaxhighlight
+  eleventyConfig.addPlugin(syntaxHighlight);
 
   // https://github.com/11ty/eleventy-plugin-rss
-  config.addPlugin(pluginRss);
+  // Feed metadata is pulled from src/_data/site.js for single source of truth
+  eleventyConfig.addPlugin(feedPlugin, {
+    type: site.feed.type,
+    outputPath: site.feed.path,
+    collection: site.feed.collection,
+    metadata: {
+      language: site.metaLang,
+      title: site.title,
+      subtitle: site.feed.subtitle,
+      base: `${site.url}/`,
+      author: {
+        name: site.author,
+        email: site.email,
+      },
+    },
+  });
 
   // Disable extensionless layouts
-  config.setLayoutResolution(false);
+  eleventyConfig.setLayoutResolution(false);
 
   // If you have other `addPlugin` calls, it’s important that UpgradeHelper is added last.
   //config.addPlugin(UpgradeHelper);
@@ -54,15 +60,15 @@ module.exports = function (config) {
   */
 
   // Minify CSS in production
-  config.addFilter("cssMin", function (code) {
+  eleventyConfig.addFilter("cssMin", function (code) {
     if (process.env.ELEVENTY_ENV == "production") {
-      return new cleanCSS({}).minify(code).styles;
+      return new CleanCSS({}).minify(code).styles;
     }
     return code;
   });
 
   // ISO post datetime for search engines to read
-  config.addFilter("dateTime", function (value) {
+  eleventyConfig.addFilter("dateTime", function (value) {
     const dateObject = new Date(value);
     return dateObject.toISOString();
   });
@@ -74,7 +80,7 @@ module.exports = function (config) {
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
 
-  config.addFilter("ordinalDate", function (value) {
+  eleventyConfig.addFilter("ordinalDate", function (value) {
     const dateObject = new Date(value);
     const months = [
       "January",
@@ -102,35 +108,10 @@ module.exports = function (config) {
   });
 
   // Calculate blog posts reading time
-  config.addFilter("readingTime", function (text) {
+  eleventyConfig.addFilter("readingTime", function (text) {
     const wordsPerMinute = 200;
     const numberOfWords = text.split(/\s/g).length;
     return Math.ceil(numberOfWords / wordsPerMinute);
-  });
-
-  /*
-
-    Transforms
-    https://www.11ty.dev/docs/config/#transforms
-
-  */
-
-  // https://github.com/kangax/html-minifier
-  config.addTransform("htmlMin", function (value, outputPath) {
-    if (
-      process.env.ELEVENTY_ENV == "production" &&
-      outputPath &&
-      outputPath.indexOf(".html") > -1
-    ) {
-      let minified = htmlMinifier.minify(value, {
-        useShortDoctype: true,
-        removeComments: true,
-        collapseWhitespace: true,
-        minifyCSS: true,
-      });
-      return minified;
-    }
-    return value;
   });
 
   /*
@@ -141,12 +122,12 @@ module.exports = function (config) {
   */
 
   // Creates a list of blog post within `/posts/` folder in reverse chronological order
-  config.addCollection("posts", function (collection) {
-    return collection.getFilteredByGlob("./src/posts/*.md").reverse();
+  eleventyConfig.addCollection("posts", function (collection) {
+    return collection.getFilteredByGlob("./src/posts/*.md");
   });
 
   // Tags
-  config.addCollection("tagList", function (collection) {
+  eleventyConfig.addCollection("tagList", function (collection) {
     let tagSet = new Set();
     collection.getAll().forEach(function (item) {
       if ("tags" in item.data) {
@@ -183,11 +164,11 @@ module.exports = function (config) {
   */
 
   // https://www.11ty.dev/docs/layouts/#layout-aliasing
-  config.addLayoutAlias("archive.njk", "layouts/archive.njk");
-  config.addLayoutAlias("base.njk", "layouts/base.njk");
-  config.addLayoutAlias("blog.njk", "layouts/blog.njk");
-  config.addLayoutAlias("page.njk", "layouts/page.njk");
-  config.addLayoutAlias("post.njk", "layouts/post.njk");
+  eleventyConfig.addLayoutAlias("archive.njk", "layouts/archive.njk");
+  eleventyConfig.addLayoutAlias("base.njk", "layouts/base.njk");
+  eleventyConfig.addLayoutAlias("blog.njk", "layouts/blog.njk");
+  eleventyConfig.addLayoutAlias("page.njk", "layouts/page.njk");
+  eleventyConfig.addLayoutAlias("post.njk", "layouts/post.njk");
 
   /*
 
@@ -197,12 +178,10 @@ module.exports = function (config) {
   */
 
   // Copies all files/folders to output directory
-  config.addPassthroughCopy("./src/favicons/");
-  config.addPassthroughCopy("./src/feed.xml");
-  config.addPassthroughCopy("./src/sitemap.xml");
-  config.addPassthroughCopy("./src/_redirects");
-  config.addPassthroughCopy("./src/404.html");
-  config.addPassthroughCopy("./src/robots.txt");
+  eleventyConfig.addPassthroughCopy("./src/favicons/");
+  eleventyConfig.addPassthroughCopy("./src/css/");
+  eleventyConfig.addPassthroughCopy("./src/_redirects");
+  eleventyConfig.addPassthroughCopy("./src/robots.txt");
 
   /*
 
@@ -211,7 +190,7 @@ module.exports = function (config) {
 
   */
 
-  config.addNunjucksAsyncShortcode("image", imageShortcode);
+  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
 
   async function imageShortcode(src, alt, sizes) {
     let metadata = await Image(src, {
@@ -267,7 +246,7 @@ module.exports = function (config) {
         symbol: "#",
         level: [1, 2, 3, 4],
       }),
-      slugify: config.getFilter("slugify"),
+      slugify: eleventyConfig.getFilter("slugify"),
     })
 
     // https://www.npmjs.com/package/markdown-it-attrs
@@ -280,7 +259,7 @@ module.exports = function (config) {
   md.renderer.rules.footnote_block_open = () =>
     "<hr>\n" + '<section class="fn">\n' + "<ol>\n";
 
-  config.setLibrary("md", md);
+  eleventyConfig.setLibrary("md", md);
 
   return {
     passthroughFileCopy: true,
@@ -293,4 +272,4 @@ module.exports = function (config) {
       output: "dist",
     },
   };
-};
+}
