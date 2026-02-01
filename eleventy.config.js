@@ -2,6 +2,7 @@ import CleanCSS from "clean-css";
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import site from "./src/_data/site.js";
 import Image from "@11ty/eleventy-img";
+import htmlMin from "html-minifier-terser";
 import markdownIt from "markdown-it";
 import markdownItAbbr from "markdown-it-abbr";
 import markdownItAnchor from "markdown-it-anchor";
@@ -51,6 +52,32 @@ export default function (eleventyConfig) {
 
   // If you have other `addPlugin` calls, it’s important that UpgradeHelper is added last.
   //config.addPlugin(UpgradeHelper);
+
+  /*
+
+    Transforms
+    https://www.11ty.dev/docs/transforms/
+
+  */
+
+  // Minify HTML in production
+  eleventyConfig.addTransform("htmlMin", async function (content) {
+    if (
+      process.env.ELEVENTY_ENV === "production" &&
+      (this.page.outputPath || "").endsWith(".html")
+    ) {
+      return await htmlMin.minify(content, {
+        collapseWhitespace: true,
+        removeComments: true,
+        useShortDoctype: true,
+        removeRedundantAttributes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true,
+        minifyCSS: true,
+      });
+    }
+    return content;
+  });
 
   /*
 
