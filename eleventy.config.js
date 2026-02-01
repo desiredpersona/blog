@@ -206,9 +206,29 @@ export default function (eleventyConfig) {
 
   // Copies all files/folders to output directory
   eleventyConfig.addPassthroughCopy("./src/favicons/");
-  eleventyConfig.addPassthroughCopy("./src/css/");
   eleventyConfig.addPassthroughCopy("./src/_redirects");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
+
+  /*
+
+    Template Extensions
+    https://www.11ty.dev/docs/languages/custom/
+
+  */
+
+  // Process CSS files with CleanCSS minification in production
+  eleventyConfig.addTemplateFormats("css");
+  eleventyConfig.addExtension("css", {
+    outputFileExtension: "css",
+    compile: async function (inputContent) {
+      return async () => {
+        if (process.env.ELEVENTY_ENV === "production") {
+          return new CleanCSS({}).minify(inputContent).styles;
+        }
+        return inputContent;
+      };
+    },
+  });
 
   /*
 
