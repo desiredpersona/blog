@@ -1,5 +1,5 @@
-import CleanCSS from "clean-css";
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
+import lightningCSS from "@11tyrocks/eleventy-plugin-lightningcss";
 import site from "./src/_data/site.js";
 import Image from "@11ty/eleventy-img";
 import htmlMin from "html-minifier-terser";
@@ -28,6 +28,15 @@ export default function (eleventyConfig) {
 
   // https://github.com/11ty/eleventy-plugin-syntaxhighlight
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  // https://github.com/5t3ph/eleventy-plugin-lightningcss
+  eleventyConfig.addPlugin(lightningCSS, {
+    importPrefix: "_",
+    nesting: true,
+    customMedia: true,
+    minify: process.env.ELEVENTY_ENV === "production",
+    sourceMap: process.env.ELEVENTY_ENV !== "production",
+  });
 
   // https://github.com/11ty/eleventy-plugin-rss
   // Feed metadata is pulled from src/_data/site.js for single source of truth
@@ -85,14 +94,6 @@ export default function (eleventyConfig) {
     https://www.11ty.dev/docs/filters/
 
   */
-
-  // Minify CSS in production
-  eleventyConfig.addFilter("cssMin", function (code) {
-    if (process.env.ELEVENTY_ENV == "production") {
-      return new CleanCSS({}).minify(code).styles;
-    }
-    return code;
-  });
 
   // ISO post datetime for search engines to read
   eleventyConfig.addFilter("dateTime", function (value) {
@@ -208,27 +209,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/favicons/");
   eleventyConfig.addPassthroughCopy("./src/_redirects");
   eleventyConfig.addPassthroughCopy("./src/robots.txt");
-
-  /*
-
-    Template Extensions
-    https://www.11ty.dev/docs/languages/custom/
-
-  */
-
-  // Process CSS files with CleanCSS minification in production
-  eleventyConfig.addTemplateFormats("css");
-  eleventyConfig.addExtension("css", {
-    outputFileExtension: "css",
-    compile: async function (inputContent) {
-      return async () => {
-        if (process.env.ELEVENTY_ENV === "production") {
-          return new CleanCSS({}).minify(inputContent).styles;
-        }
-        return inputContent;
-      };
-    },
-  });
 
   /*
 

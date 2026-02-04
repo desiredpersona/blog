@@ -66,16 +66,10 @@
     <link rel="preconnect" href="//www.google-analytics.com">
   {% endif %}
 
-  <!-- CSS stylesheet -->
-  <!-- Critical CSS: Inlined for fast first paint -->
-  {% set criticalCss %}
-    {% include "css/critical.css" %}
-  {% endset %}
-  <style>{{ criticalCss | cssMin | safe }}</style>
-
-  <!-- Full CSS: Preloaded and loaded asynchronously -->
-  <link rel="preload" href="/css/nostalgia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/css/nostalgia.css"></noscript>
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/syntax.css">
 
   <!-- Feed -->
   <link rel="alternate" href="{{ site.feed.path | url }}" title="{{ site.title }}" type="application/atom+xml">
