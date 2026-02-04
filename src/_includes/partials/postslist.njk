@@ -3,25 +3,30 @@
     {%- for post in postslist | reverse %}
     <li>
       <article>
-        {% if dates %}
-        {% set date = post.data.date %}
-        <span class="plm pm">
-          <time datetime="{{ post.date | dateTime }}">{{ date | ordinalDate }}</time>
-        </span>
-        {% endif %}
-
         {% if post.data.canonical %}
-        <a href="{{ post.data.canonical }}" target="_blank" rel="external noopener">
+        <a href="{{ post.data.canonical }}" class="plc" target="_blank" rel="external noopener">
+          {% if dates %}
+          <span class="plm pm">
+            <time datetime="{{ post.date | dateTime }}">{{ post.data.date | ordinalDate }}</time>
+          </span>
+          {% endif %}
           <h3 class="plt ext">{{ post.data.title | escape }}</h3>
+          {% if excerpts %}
+          <p class="ple">{{ post.data.description }}</p>
+          {% endif %}
         </a>
         {% else %}
-        <a href="{{ post.url }}">
+        <a href="{{ post.url }}" class="plc">
+          {% if dates %}
+          <span class="plm pm">
+            <time datetime="{{ post.date | dateTime }}">{{ post.data.date | ordinalDate }}</time>
+          </span>
+          {% endif %}
           <h3 class="plt">{{ post.data.title | escape }}</h3>
+          {% if excerpts %}
+          <p class="ple">{{ post.data.description }}</p>
+          {% endif %}
         </a>
-        {% endif %}
-
-        {% if excerpts %}
-        <p class="ple">{{ post.data.description }}</p>
         {% endif %}
       </article>
     </li>
