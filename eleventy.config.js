@@ -206,9 +206,9 @@ export default function (eleventyConfig) {
   */
 
   // Copies all files/folders to output directory
-  eleventyConfig.addPassthroughCopy("./src/favicons/");
-  eleventyConfig.addPassthroughCopy("./src/_redirects");
-  eleventyConfig.addPassthroughCopy("./src/robots.txt");
+  eleventyConfig.addPassthroughCopy("src/favicons/");
+  eleventyConfig.addPassthroughCopy("src/_redirects");
+  eleventyConfig.addPassthroughCopy("src/robots.txt");
 
   /*
 
@@ -224,7 +224,7 @@ export default function (eleventyConfig) {
       widths: [640, 1280, 1600, 1920],
       formats: ["avif", "webp", "jpeg"],
       urlPath: "/img/",
-      outputDir: "dist/img/",
+      outputDir: "_site/img/",
       filenameFormat: function (id, src, width, format, options) {
         const extension = path.extname(src);
         const name = path.basename(src, extension);
@@ -296,7 +296,7 @@ export default function (eleventyConfig) {
       input: "src",
       includes: "_includes",
       data: "_data",
-      output: "dist",
+      output: "_site",
     },
   };
 }
