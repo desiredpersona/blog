@@ -1,14 +1,13 @@
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import lightningCSS from "@11tyrocks/eleventy-plugin-lightningcss";
 import site from "./src/_data/site.js";
-import Image from "@11ty/eleventy-img";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import htmlMin from "html-minifier-terser";
 import markdownIt from "markdown-it";
 import markdownItAbbr from "markdown-it-abbr";
 import markdownItAnchor from "markdown-it-anchor";
 import markdownItAttrs from "markdown-it-attrs";
 import markdownItFootnote from "markdown-it-footnote";
-import path from "path";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
@@ -210,42 +209,20 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("_redirects");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
 
-  /*
-
-    Shortcodes
-    https://www.11ty.dev/docs/shortcodes/
-
-  */
-
-  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
-
-  async function imageShortcode(src, alt, sizes) {
-    let metadata = await Image(src, {
-      widths: [640, 1280, 1600, 1920],
-      formats: ["avif", "webp", "jpeg"],
-      urlPath: "/img/",
-      outputDir: "_site/img/",
-      filenameFormat: function (id, src, width, format, options) {
-        const extension = path.extname(src);
-        const name = path.basename(src, extension);
-
-        return `${name}-${width}w.${format}`;
+  // https://www.11ty.dev/docs/plugins/image/
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    formats: ["avif", "webp", "jpeg"],
+    widths: ["auto", 640, 1280, 1920],
+    urlPath: "/img/",
+    outputDir: "_site/img/",
+    htmlOptions: {
+      imgAttributes: {
+        loading: "lazy",
+        decoding: "async",
       },
-    });
-
-    let imageAttributes = {
-      alt,
-      sizes,
-      loading: "lazy",
-      decoding: "async",
-    };
-
-    // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
-    return Image.generateHTML(metadata, imageAttributes, {
-      // Strip the whitespace from the output of the <picture> element
-      whitespaceMode: "inline",
-    });
-  }
+      pictureAttributes: {},
+    },
+  });
 
   /*
 

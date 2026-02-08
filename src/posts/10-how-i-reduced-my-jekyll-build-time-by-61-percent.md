@@ -255,7 +255,7 @@ After all these changes, Jekyll now builds my site in **6.262** seconds, a furth
 
 I have managed to shave a grand total of **9.852** seconds off my original build time of **16.114** seconds, which is a whopping **61.139%** speed improvement!
 
-{% image "./src/img/jekyll-build-graph.png", "Jekyll build graph", "100vw" %}
+<img src="../img/jekyll-build-graph.png" alt="Jekyll build graph">
 
 It's worth mentioning we can also enable [incremental regeneration](https://jekyllrb.com/docs/configuration/incremental-regeneration/), which helps shorten Jekyll build times by only generating the documents and pages that were updated since the previous build.
 

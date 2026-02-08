@@ -23,7 +23,7 @@ Jekyll also now calculates `{% raw %}site.related_posts{% endraw %}` only when n
 
 Let’s test this with [a blog with more than 2200 posts](https://github.com/tomjoht/tomjoht.github.io) and some default plugins.
 
-{% image "./src/img/total-build-times.png", "Jekyll build times", "100vw" %}
+<img src="../img/total-build-times.png" alt="Jekyll build times">
 
 [https://idratherbewriting.com/](https://idratherbewriting.com/) took on average around 140s to build with Jekyll 3.7.3.
 
