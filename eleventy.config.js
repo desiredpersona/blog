@@ -207,7 +207,7 @@ export default function (eleventyConfig) {
 
   // Copies all files/folders to output directory
   eleventyConfig.addPassthroughCopy("src/favicons/");
-  eleventyConfig.addPassthroughCopy("src/_redirects");
+  eleventyConfig.addPassthroughCopy("_redirects");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
 
   /*
